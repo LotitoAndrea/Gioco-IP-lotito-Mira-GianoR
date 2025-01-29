@@ -49,22 +49,13 @@ function loadQuestion() {
         const question = questions[currentQuestion];
         const questionContainer = document.getElementById('question-container');
         
-        if (questionContainer) {
-            let questionHTML = `<p>${question.question}</p>`;
-            question.options.forEach((option, index) => {
-                questionHTML += `
-                    <button class="option-button" data-index="${index}">${option}</button>
-                `;
-            });
-            questionContainer.innerHTML = questionHTML;
-        }
-        const optionButtons = document.querySelectorAll('.option-button');
-        optionButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                const selectedOption = parseInt(event.target.getAttribute('data-index'));
-                checkAnswer(selectedOption);
-            });
+        let questionHTML = `<p>${question.question}</p>`;
+        question.options.forEach((option, index) => {
+            questionHTML += `
+                <button onclick="checkAnswer(${index})">${option}</button>
+            `;
         });
+        questionContainer.innerHTML = questionHTML;
     } else {
         showResult();
     }
@@ -77,33 +68,24 @@ function checkAnswer(selectedOption) {
     }
     currentQuestion++;
     loadQuestion();
-        const resultContainer = document.getElementById('result-container');
-        if (resultContainer) {
-            resultContainer.style.display = 'block';
-        }
-    }
+}
 
 function showResult() {
-    if (scoreElement) {
-        scoreElement.textContent = `Punteggio: ${score}`;
-    }
     const quizContainer = document.getElementById('quiz-container');
-    if (quizContainer) {
-        quizContainer.style.display = 'none';
-    }
-    scoreElement.textContent = `Punteggio: ${score}`;
-    document.getElementById('quiz-container').style.display = 'none';
-    resultContainer.style.display = 'block';
+    quizContainer.innerHTML = `
+        <h2>Hai finito il quiz!</h2>
+        <p id="score">Punteggio: ${score}</p>
+        <button onclick="startQuiz()">Ricomincia</button>
+    `;
 }
 
 function startQuiz() {
-    const quizContainer = document.getElementById('quiz-container');
-    if (quizContainer) {
-        quizContainer.style.display = 'block';
-    }
+    score = 0;
     currentQuestion = 0;
-    document.getElementById('quiz-container').style.display = 'block';
-    document.getElementById('result-container').style.display = 'none';
+    document.getElementById('quiz-container').innerHTML = `
+        <h1>Gioco sugli Indirizzi IP</h1>
+        <div id="question-container"></div>
+    `;
     loadQuestion();
 }
 
