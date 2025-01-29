@@ -8,6 +8,8 @@ body {
     align-items: center;
     height: 100vh;
     width: 100vw;
+    background-image: url('https://cdn.prod.website-files.com/6365084f1295f38fadbf8824/662fa24e6f57176faa5479d9_indirizzi%20ip.webp');
+    background-size: cover;
 }
 
 #container {
