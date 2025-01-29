@@ -49,13 +49,22 @@ function loadQuestion() {
         const question = questions[currentQuestion];
         const questionContainer = document.getElementById('question-container');
         
-        let questionHTML = `<p>${question.question}</p>`;
-        question.options.forEach((option, index) => {
-            questionHTML += `
-                <button onclick="checkAnswer(${index})">${option}</button>
-            `;
+        if (questionContainer) {
+            let questionHTML = `<p>${question.question}</p>`;
+            question.options.forEach((option, index) => {
+                questionHTML += `
+                    <button class="option-button" data-index="${index}">${option}</button>
+                `;
+            });
+            questionContainer.innerHTML = questionHTML;
+        }
+        const optionButtons = document.querySelectorAll('.option-button');
+        optionButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const selectedOption = parseInt(event.target.getAttribute('data-index'));
+                checkAnswer(selectedOption);
+            });
         });
-        questionContainer.innerHTML = questionHTML;
     } else {
         showResult();
     }
@@ -68,18 +77,30 @@ function checkAnswer(selectedOption) {
     }
     currentQuestion++;
     loadQuestion();
-}
+        const resultContainer = document.getElementById('result-container');
+        if (resultContainer) {
+            resultContainer.style.display = 'block';
+        }
+    }
 
 function showResult() {
-    const resultContainer = document.getElementById('result-container');
-    const scoreElement = document.getElementById('score');
+    if (scoreElement) {
+        scoreElement.textContent = `Punteggio: ${score}`;
+    }
+    const quizContainer = document.getElementById('quiz-container');
+    if (quizContainer) {
+        quizContainer.style.display = 'none';
+    }
     scoreElement.textContent = `Punteggio: ${score}`;
     document.getElementById('quiz-container').style.display = 'none';
     resultContainer.style.display = 'block';
 }
 
 function startQuiz() {
-    score = 0;
+    const quizContainer = document.getElementById('quiz-container');
+    if (quizContainer) {
+        quizContainer.style.display = 'block';
+    }
     currentQuestion = 0;
     document.getElementById('quiz-container').style.display = 'block';
     document.getElementById('result-container').style.display = 'none';
