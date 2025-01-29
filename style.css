@@ -10,6 +10,7 @@ body {
     width: 100vw;
     background-image: url('https://cdn.prod.website-files.com/6365084f1295f38fadbf8824/662fa24e6f57176faa5479d9_indirizzi%20ip.webp');
     background-size: cover;
+    text-align: center;
 }
 
 #container {
@@ -48,12 +49,13 @@ body {
 }
 
 button {
+    margin-top: 1rem;
     background-color: #4CAF50;
     color: white;
     padding: 10px;
     width: 100%;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
 }
