@@ -63,11 +63,15 @@ function loadQuestion() {
 
 function checkAnswer(selectedOption) {
     const correctAnswer = questions[currentQuestion].answer;
+    const questionContainer = document.getElementById('question-container');
     if (selectedOption === correctAnswer) {
         score++;
+        questionContainer.innerHTML += `<p style="color: green;">Corretto! Bravo! :D</p>`;
+    } else {
+        questionContainer.innerHTML += `<p style="color: red;">Sbagliato! La risposta corretta era: ${questions[currentQuestion].options[correctAnswer]}</p>`;
     }
     currentQuestion++;
-    loadQuestion();
+    setTimeout(loadQuestion, 10000); // Attendi 2 secondi prima di caricare la prossima domanda
 }
 
 function showResult() {
