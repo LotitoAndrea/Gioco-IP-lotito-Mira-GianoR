@@ -71,7 +71,7 @@ function checkAnswer(selectedOption) {
         questionContainer.innerHTML += `<p style="color: red;">Sbagliato! La risposta corretta era: ${questions[currentQuestion].options[correctAnswer]}</p>`;
     }
     currentQuestion++;
-    setTimeout(loadQuestion, 10000); // Attendi 2 secondi prima di caricare la prossima domanda
+    setTimeout(loadQuestion, 4000);
 }
 
 function showResult() {
